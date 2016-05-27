@@ -116,7 +116,7 @@ def main():
     parser.add_argument('message', nargs='+', help='Text string to send as CW')
     args = parser.parse_args()
     cw = CWString()
-    message = ' '.join(args.message)
+    message = ' '.join(args.message).lower()
     encoded = cw.encode(message)
     sender = CWSender(args.cps)
     sender.send(encoded)
