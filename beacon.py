@@ -1,5 +1,5 @@
 import time
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 class CWString(object):
     letters = { 'a' : '.-',
@@ -64,14 +64,12 @@ class CWString(object):
 
 class CWSender(object):
     cps = None
-    csp = None
-    wsp = None
     timer = None
 
-    def __init__(self, cps, cspace, wspace):
+    def __init__(self, cps):
         self.cps = cps
-        self.csp = cspace
-        self.wsp = wspace
+        self.dit_length = 1.0/cps
+        self.dah_length = self.dit_length*3
 
     def send(self, m):
         for i in m:
@@ -88,34 +86,39 @@ class CWSender(object):
 
 
     def dit(self):
-        print 'dit '
+        GPIO.output(11,True)
+        time.sleep(self.dit_length)
+        GPIO.output(11,False)
 
     def dah(self):
-        print 'dah '
+        GPIO.output(11,True)
+        time.sleep(self.dah_length)
+        GPIO.output(11,False)
+
 
     def wspace(self):
-        print '--- '
+        time.sleep(self.dah_length * 3)
 
     def cspace(self):
-        print '- '
+        time.sleep(self.dah_length)
 
     def pause(self):
-        print ' '
+        time.sleep(self.dit_length)
 
 
 def main():
     import argparse
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(11, GPIO.OUT)
+    GPIO.output(11,False)
     parser = argparse.ArgumentParser('CW Beacon Sender - uses GPIO pin')
     parser.add_argument('-c', '--cps', type=int, default='15', help='Characters per second to send')
-    parser.add_argument('-s', '--space', type=int, default=3, help='Farnsworth spacing... space value in \'dits\'')
-    parser.add_argument('-w', '--wspace', type=int, default=9, help=
-        "Word spacing... value in 'dits'")
     parser.add_argument('message', nargs='+', help='Text string to send as CW')
     args = parser.parse_args()
     cw = CWString()
     message = ' '.join(args.message)
     encoded = cw.encode(message)
-    sender = CWSender(args.cps, args.space, args.wspace)
+    sender = CWSender(args.cps)
     sender.send(encoded)
 
 if __name__ == "__main__":
