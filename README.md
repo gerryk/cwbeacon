@@ -15,3 +15,7 @@ Dependencies: RPi.GPIO Python module
 usage: CW Beacon Sender - uses GPIO pin [-h] [-c CPS] message [message ...]
 CW Beacon Sender - uses GPIO pin: error: too few arguments
 ```
+
+## Keying Circuit
+
+!https://dl.dropboxusercontent.com/u/32770/2016-08-09%2014.04.42.jpg)
