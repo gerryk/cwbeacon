@@ -18,4 +18,4 @@ CW Beacon Sender - uses GPIO pin: error: too few arguments
 
 ## Keying Circuit
 
-![Circuit Diagram](https://uc1459a1b3547be6e9f1dcb1d8c3.dl.dropboxusercontent.com/cd/0/inline/AwGXYGzPgg0U9viXdkZ1PiJ8teU8x904d02dYZjdXAZ2NKsBVmhHIR5cU8D4yoqUd6F4G7_B6uTy8rCQrLcMTkLDF3aIHswp18oR-C6XtY7POg/file#"")
+![Circuit Diagram](https://www.dropbox.com/s/0eb8x5ddcsrasng/2016-08-09%2015.04.42.jpg?raw=1"")
